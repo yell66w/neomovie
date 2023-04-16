@@ -109,6 +109,11 @@
   dependencies:
     glob "7.1.7"
 
+"@next/font@^13.3.0":
+  version "13.3.0"
+  resolved "https://registry.yarnpkg.com/@next/font/-/font-13.3.0.tgz#790c5444348fad7aabbfc35a45bfc50505219725"
+  integrity sha512-xUv7VRUA2Zr6n/KJDILyv7/zGy9xKUsyQURaQqYr7lVxn0REScazwyZQzhSm+DnJoUyo+9DcFs2J3WsZXHUvQw==
+
 "@next/swc-darwin-arm64@13.3.0":
   version "13.3.0"
   resolved "https://registry.yarnpkg.com/@next/swc-darwin-arm64/-/swc-darwin-arm64-13.3.0.tgz#38f18e0639cd4c7edc6a38d4b83fe00f38eea4f2"
@@ -1939,6 +1944,16 @@ react-dom@18.2.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
+
+react-icons@^4.8.0:
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.8.0.tgz#621e900caa23b912f737e41be57f27f6b2bff445"
+  integrity sha512-N6+kOLcihDiAnj5Czu637waJqSnwlMNROzVZMhfX68V/9bu9qHaMIJC4UdozWoOk57gahFCNHwVvWzm0MTzRjg==
+
+react-indiana-drag-scroll@^3.0.3-alpha:
+  version "3.0.3-alpha"
+  resolved "https://registry.yarnpkg.com/react-indiana-drag-scroll/-/react-indiana-drag-scroll-3.0.3-alpha.tgz#215572d235b330ce5e070b2e2f7f6872283e5a7d"
+  integrity sha512-Bo8Ium/CGs0oIYzk4wVDphuhrf2QRvLKTLO/+21M+czF1EQEII4w1UqoFs4lIGd84YpVL8UDXIcy2m9yzsFuRQ==
 
 react-is@^16.13.1:
   version "16.13.1"
