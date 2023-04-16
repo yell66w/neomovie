@@ -13,6 +13,7 @@ const Navbar = () => {
         <ul id="navbar-links" className="gap-6 hidden lg:flex text-center ">
           <LinkItem title="Home" href="/" />
           <LinkItem title="Discover" href="/movie" />
+          <LinkItem title="Genre" href="/genre" />
           <LinkItem title="Favorites" href="/favorites" />
         </ul>
         <FiMenu className="lg:hidden absolute right-6" />
