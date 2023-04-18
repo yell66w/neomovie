@@ -13,18 +13,21 @@ interface Props {
   reviews: IReview[];
   posters: IImage[];
   similar_movies: IMovieOverview[];
+  videos: any;
 }
 const MovieDetailsPage = ({
   movie,
   reviews,
   posters,
   similar_movies,
+  videos,
 }: Props) => {
   const { title, genres, overview, backdrop_path, vote_average, vote_count } =
     movie;
   return (
     <div className="flex flex-col gap-5 lg:gap-20 ">
       <Hero
+        videos={videos}
         background_url={backdrop_path}
         title={title}
         genres={genres}
@@ -47,6 +50,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = Number(context?.query?.id);
 
   const movie = await getMovie({ path: `/${id}` });
+  const { results: videos } = await getMovie({ path: `/${id}/videos` });
 
   const { results: similar_movies } = await getMovie({
     path: `/${id}/similar`,
@@ -68,6 +72,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       posters,
       reviews,
       similar_movies,
+      videos,
     },
   };
 };

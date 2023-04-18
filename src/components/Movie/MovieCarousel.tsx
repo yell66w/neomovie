@@ -27,6 +27,7 @@ export default function MovieCarousel({ movies }: Props) {
   return (
     <div className="h-[250px] sm:h-[700px] lg:h-[800px] xl:h-[1000px] w-full group">
       <Hero
+        navigateTo={`/movies/${movies[currentIndex]?.id}`}
         background_url={movies[currentIndex]?.backdrop_path}
         title={movies[currentIndex].title}
         overview={movies[currentIndex].overview}
