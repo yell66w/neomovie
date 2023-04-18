@@ -1,13 +1,13 @@
 import { getMovies } from "@/api/movies";
 import MovieCarousel from "@/components/Movie/MovieCarousel";
 import MovieOverviewList from "@/components/Movie/MovieOverviewList";
-import { Movie } from "@/interfaces/Movie";
+import { IMovieOverview } from "@/interfaces/Movie";
 
 interface Props {
-  nowPlaying: Movie[];
-  topRated: Movie[];
-  upcoming: Movie[];
-  popular: Movie[];
+  nowPlaying: IMovieOverview[];
+  topRated: IMovieOverview[];
+  upcoming: IMovieOverview[];
+  popular: IMovieOverview[];
 }
 
 export default function Home({

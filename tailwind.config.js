@@ -4,6 +4,7 @@ export const content = [
   "./src/components/**/*.{js,ts,jsx,tsx}",
   "./src/app/**/*.{js,ts,jsx,tsx}",
 ];
+const colors = require("tailwindcss/colors");
 export const theme = {
   colors: {
     primary: "#08D9D6",
@@ -11,6 +12,7 @@ export const theme = {
     neutral: "#23232D",
     white: "#fff",
     black: "#0F1015",
+    transparent: colors.transparent,
   },
   extend: {
     backgroundImage: {

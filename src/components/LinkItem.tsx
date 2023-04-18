@@ -8,13 +8,13 @@ interface Props {
 
 const LinkItem = ({ title = "Home", href = "/" }: Props) => {
   const router = useRouter();
-  const isSelected = router.pathname.includes(href);
+  const isSelected = href !== "/" ? router.pathname.includes(href) : false;
   return (
     <Link
       href={href}
       className={`${
-        isSelected ? "text-white" : "text-secondary"
-      } text-sm text-secondary hover:text-white transition duration-200 ease-linear focus:text-white`}
+        isSelected ? "text-primary" : "text-white "
+      } font-medium text-sm hover:text-primary transition duration-200 ease-linear focus:text-primary`}
     >
       {title}
     </Link>
