@@ -3,18 +3,17 @@ import {
   PLACEHOLDER_BACKGROUND_IMAGE,
   YOUTUBE_URL,
 } from "@/constants";
-import React, { useState } from "react";
-import Button from "./Button";
-import { BsFillPlayFill, BsArrowRight } from "react-icons/bs";
-import ScrollContainer from "react-indiana-drag-scroll";
 import { IImage } from "@/interfaces/Image";
-import PosterList from "./Poster/PosterList";
-import PosterCard from "./Poster/PosterCard";
-import Genres from "./Genres";
-import Star from "./Star";
 import { IVideo } from "@/interfaces/Video";
-import Modal from "./Modal";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { BsArrowRight, BsFillPlayFill } from "react-icons/bs";
+import Button from "./Button";
+import Genres from "./Genres";
+import Modal from "./Modal";
+import PosterCard from "./Poster/PosterCard";
+import PosterList from "./Poster/PosterList";
+import Star from "./Star";
 
 interface Props {
   background_url: string | null;
@@ -41,8 +40,9 @@ const Hero = ({
 }: Props) => {
   const [showModal, setShowModal] = useState(false);
 
-  console.log({ videos });
-  const officialTrailer = videos?.find((video) => video.official);
+  const officialTrailer = videos?.find(
+    (video) => video.official && video.type === "Trailer"
+  );
   const router = useRouter();
   return (
     <>

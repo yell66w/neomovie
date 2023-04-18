@@ -19,7 +19,7 @@ export default function Home({
   return (
     <main>
       <MovieCarousel movies={nowPlaying} />
-      <div className="mt-16 flex flex-col gap-16">
+      <div className="mt-30 flex flex-col gap-16">
         <MovieOverviewList title="Popular" movies={popular} />
         <MovieOverviewList title="Top Rated" movies={topRated} />
         <MovieOverviewList title="Upcoming" movies={upcoming} />

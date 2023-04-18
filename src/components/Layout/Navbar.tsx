@@ -1,7 +1,9 @@
-import { FiMenu, FiSearch } from "react-icons/fi";
-import Button from "../Button";
+import { useRouter } from "next/router";
+import { FiMenu } from "react-icons/fi";
 import LinkItem from "../LinkItem";
+import Searchbar from "../Searchbar";
 const Navbar = () => {
+  const router = useRouter();
   //Refactor
   return (
     <header
@@ -9,7 +11,9 @@ const Navbar = () => {
         background:
           "linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%)",
       }}
-      className="absolute w-full flex text-2xl pb-10 pt-4 px-4 lg:px-16  lg:items-center flex-col lg:flex-row z-10"
+      className={`${
+        router.pathname === "/movies/search" ? "" : "absolute"
+      } w-full flex text-2xl pb-10 pt-4 px-4 lg:px-16  lg:items-center flex-col lg:flex-row z-10`}
     >
       <div id="navbar-title" className="flex">
         <p className="font-bold text-primary">NEO</p>
@@ -24,17 +28,7 @@ const Navbar = () => {
         </ul>
         <FiMenu className="lg:hidden absolute right-6 top-5" />
       </div>
-      <div
-        id="search-bar"
-        className="hidden lg:flex ml-auto gap-2 relative  self-center lg:mt-0 mt-5 w-full lg:w-3/12"
-      >
-        <input
-          placeholder="Search movies..."
-          className="placeholder-white w-full bg-transparent border-white border-b pl-9 pr-4 py-4 h-10  text-white text-xs outline-none"
-        />
-        <FiSearch className="absolute top-2.5 left-2 text-lg" />
-        {/* <Button className="hidden lg:block">Search</Button> */}
-      </div>
+      <Searchbar />
     </header>
   );
 };

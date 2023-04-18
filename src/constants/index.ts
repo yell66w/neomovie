@@ -1,5 +1,5 @@
 export const IMAGEDB_URL = "https://image.tmdb.org/t/p/original";
-export const API_URL = "https://api.themoviedb.org/3/movie";
+export const API_URL = "https://api.themoviedb.org/3";
 export const YOUTUBE_URL = "https://www.youtube.com/embed";
 export const PLACEHOLDER_AVATAR_URL =
   "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541";
