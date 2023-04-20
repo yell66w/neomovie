@@ -1,16 +1,17 @@
 import { IMAGEDB_URL, PLACEHOLDER_AVATAR_URL } from "@/constants";
 import { IReview } from "@/interfaces/Review";
 import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
 
 interface Props {
   review: IReview;
 }
 
 const ReviewCard = ({ review }: Props) => {
+  const [readMore, setReadMore] = useState(false);
   return (
-    <div className=" py-4 border-b border-neutral gap-6 flex flex-col lg:w-1/2 lg:px-10">
-      <div className="flex gap-6 items-center">
+    <div className="rounded-xl py-6 px-6 bg-neutral gap-6 flex flex-col ">
+      <div className="flex gap-6  flex-col min-[300px]:flex-row items-center">
         <div
           style={{
             backgroundImage: `url(${
@@ -20,7 +21,7 @@ const ReviewCard = ({ review }: Props) => {
             })`,
           }}
           key={review.id}
-          className="bg-center bg-cover  inline-block h-9 w-9 rounded-full ring-2 ring-white"
+          className="bg-center bg-cover inline-block h-9 w-9 rounded-full ring-2 ring-white"
         />
         <div className="flex flex-col">
           <p className="text-sm font-bold">{review.author}</p>
@@ -29,7 +30,7 @@ const ReviewCard = ({ review }: Props) => {
           </p>
         </div>
         {!!review?.author_details?.rating ? (
-          <div className="flex items-center gap-1 ml-auto">
+          <div className="flex items-center gap-1 min-[300px]:ml-auto">
             <svg
               aria-hidden="true"
               className="w-5 h-5 text-primary"
@@ -49,14 +50,18 @@ const ReviewCard = ({ review }: Props) => {
         )}
       </div>
 
-      <p className="text-xs text-secondary">
-        {review?.content?.length > 400
-          ? review.content.slice(0, 400) + "..."
-          : review.content}
+      <p className="text-xs text-secondary break-words">
+        {review?.content?.length <= 400 || readMore
+          ? review.content
+          : review.content.slice(0, 400) + "..."}
       </p>
-      {review?.content?.length > 400 && (
-        <p className="text-xs self-end text-primary cursor-pointer">
-          Read More
+
+      {review?.content?.length > 400 && !readMore && (
+        <p
+          onClick={() => setReadMore(true)}
+          className="mt-auto hover:opacity-90 transition duration-100 text-xs self-end text-primary cursor-pointer"
+        >
+          {"Read More"}
         </p>
       )}
     </div>
