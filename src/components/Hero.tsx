@@ -1,4 +1,6 @@
+import { toggleFavorite } from "@/api/favorites";
 import {
+  APP_URL,
   IMAGEDB_URL,
   PLACEHOLDER_BACKGROUND_IMAGE,
   YOUTUBE_URL,
@@ -6,15 +8,16 @@ import {
 import { IImage } from "@/interfaces/Image";
 import { IVideo } from "@/interfaces/Video";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { BsArrowRight, BsFillPlayFill } from "react-icons/bs";
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
+import { BsArrowRight, BsFillPlayFill, BsHeartFill } from "react-icons/bs";
 import Button from "./Button";
 import Genres from "./Genres";
 import Modal from "./Modal";
 import PosterCard from "./Poster/PosterCard";
 import PosterList from "./Poster/PosterList";
 import Star from "./Star";
-
+//TODO refactor this page
 interface Props {
   background_url: string | null;
   title: string;
@@ -25,6 +28,8 @@ interface Props {
   genres?: { id: number; name: string }[];
   videos?: IVideo[];
   navigateTo?: any;
+  movieId: number;
+  itemStatus?: boolean;
 }
 
 const Hero = ({
@@ -37,13 +42,36 @@ const Hero = ({
   review_count,
   videos,
   navigateTo,
+  itemStatus,
+  movieId,
 }: Props) => {
   const [showModal, setShowModal] = useState(false);
+  const [cookies] = useCookies();
+  const [markedFavorite, setMarkedFavorite] = useState(itemStatus || false);
+  const tmdbRequestToken = cookies["tmdb-request-token"];
+  const router = useRouter();
+  const { id } = router.query;
+
+  useEffect(() => {
+    if (itemStatus !== undefined) {
+      setMarkedFavorite(itemStatus);
+    }
+  }, [id, itemStatus]);
 
   const officialTrailer = videos?.find(
     (video) => video.official && video.type === "Trailer"
   );
-  const router = useRouter();
+
+  const toggleFavoriteHandler = async () => {
+    if (!tmdbRequestToken) {
+      //Login User if no request token
+      router.replace(`${APP_URL}/api/callback/auth`);
+    } else {
+      //mark favorite if authenticated
+      await toggleFavorite({ movie_id: movieId, favorite: !markedFavorite });
+      setMarkedFavorite((prev) => !prev);
+    }
+  };
   return (
     <>
       <div>
@@ -72,7 +100,6 @@ const Hero = ({
                     </p>
                   </div>
                 )}
-
                 {/* Genre */}
                 {!!genres?.length && <Genres genres={genres} />}
               </div>
@@ -82,26 +109,35 @@ const Hero = ({
               <p className="text-xs lg:text-sm">{overview}</p>
             </div>
             {/* Actions */}
-            {!!officialTrailer && (
-              <div className="w-48 mt-20">
+            <div className="w-96 mt-20 flex gap-5">
+              {itemStatus !== undefined && (
                 <Button
+                  onClick={toggleFavoriteHandler}
+                  startIcon={<BsHeartFill size={12} />}
+                >
+                  {markedFavorite ? "Added To Favorites" : "Add To Favorites"}
+                </Button>
+              )}
+
+              {!!officialTrailer && (
+                <Button
+                  variant="secondary"
                   onClick={() => setShowModal(true)}
                   startIcon={<BsFillPlayFill size={16} />}
                 >
                   Watch Trailer
                 </Button>
-              </div>
-            )}
-            {navigateTo && (
-              <div className="w-48 mt-20">
+              )}
+              {navigateTo && (
                 <Button
+                  variant="secondary"
                   onClick={() => router.push(`/${navigateTo}`)}
                   endIcon={<BsArrowRight size={16} />}
                 >
                   View Movie Details
                 </Button>
-              </div>
-            )}
+              )}
+            </div>
           </div>
           {/* Posters */}
           {!!posters?.length && (

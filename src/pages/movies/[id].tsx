@@ -1,12 +1,16 @@
+import { checkItemStatus } from "@/api/favorites";
 import { getMovie } from "@/api/movies";
 import Hero from "@/components/Hero";
 import MovieOverviewList from "@/components/Movie/MovieOverviewList";
 import ReviewList from "@/components/Reviews/ReviewList";
+import { MAX_COOKIE_AGE } from "@/constants";
 import { ICast } from "@/interfaces/Cast";
 import { IImage } from "@/interfaces/Image";
 import { IMovie, IMovieOverview } from "@/interfaces/Movie";
 import { IReview } from "@/interfaces/Review";
 import { GetServerSideProps } from "next";
+import { getCookie } from "cookies-next";
+
 interface Props {
   movie: IMovie;
   casts: ICast[];
@@ -14,6 +18,7 @@ interface Props {
   posters: IImage[];
   similar_movies: IMovieOverview[];
   videos: any;
+  itemStatus: boolean;
 }
 const MovieDetailsPage = ({
   movie,
@@ -21,12 +26,16 @@ const MovieDetailsPage = ({
   posters,
   similar_movies,
   videos,
+  itemStatus,
 }: Props) => {
   const { title, genres, overview, backdrop_path, vote_average, vote_count } =
     movie;
+
   return (
     <div className="flex flex-col gap-5 lg:gap-20 ">
       <Hero
+        itemStatus={itemStatus}
+        movieId={movie.id}
         videos={videos}
         background_url={backdrop_path}
         title={title}
@@ -46,8 +55,18 @@ const MovieDetailsPage = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id = Number(context?.query?.id);
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  query,
+}) => {
+  const id = Number(query?.id);
+  const session_id = getCookie("tmdb-session", {
+    req,
+    res,
+    maxAge: MAX_COOKIE_AGE,
+    path: "/",
+  });
 
   const movie = await getMovie({ path: `/${id}` });
   const { results: videos } = await getMovie({ path: `/${id}/videos` });
@@ -55,6 +74,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { results: similar_movies } = await getMovie({
     path: `/${id}/similar`,
   });
+
+  const itemStatus = await checkItemStatus({ session_id, movie_id: id });
 
   const { results: reviews } = await getMovie({ path: `/${id}/reviews` });
 
@@ -73,6 +94,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       reviews,
       similar_movies,
       videos,
+      itemStatus,
     },
   };
 };

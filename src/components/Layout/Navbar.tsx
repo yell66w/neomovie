@@ -4,6 +4,7 @@ import LinkItem from "../LinkItem";
 import Searchbar from "../Searchbar";
 const Navbar = () => {
   const router = useRouter();
+  const excludedFromAbsoluteRoutes = ["/movies/search", "/favorites"];
   //Refactor
   return (
     <header
@@ -12,7 +13,7 @@ const Navbar = () => {
           "linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%)",
       }}
       className={`${
-        router.pathname === "/movies/search" ? "" : "absolute"
+        excludedFromAbsoluteRoutes.includes(router.pathname) ? "" : "absolute"
       } w-full flex text-2xl pb-10 pt-4 px-4 lg:px-16  lg:items-center flex-col lg:flex-row z-10`}
     >
       <div id="navbar-title" className="flex">
