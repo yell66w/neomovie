@@ -1,6 +1,10 @@
 import { checkItemStatus } from "@/api/favorites";
 import { getMovie } from "@/api/movies";
-import Hero from "@/components/Hero";
+import Genres from "@/components/Genres";
+import MovieBanner from "@/components/Movie/MovieBanner";
+import AddToFavoriteButton from "@/components/Movie/MovieBanner/AddToFavoriteButton";
+import Rating from "@/components/Movie/MovieBanner/Rating";
+import Trailer from "@/components/Movie/MovieBanner/Trailer";
 import MovieOverviewList from "@/components/Movie/MovieOverviewList";
 import ReviewList from "@/components/Reviews/ReviewList";
 import { MAX_COOKIE_AGE } from "@/constants";
@@ -8,8 +12,8 @@ import { ICast } from "@/interfaces/Cast";
 import { IImage } from "@/interfaces/Image";
 import { IMovie, IMovieOverview } from "@/interfaces/Movie";
 import { IReview } from "@/interfaces/Review";
-import { GetServerSideProps } from "next";
 import { getCookie } from "cookies-next";
+import { GetServerSideProps } from "next";
 
 interface Props {
   movie: IMovie;
@@ -30,20 +34,28 @@ const MovieDetailsPage = ({
 }: Props) => {
   const { title, genres, overview, backdrop_path, vote_average, vote_count } =
     movie;
-
+  const officialTrailer = videos?.find(
+    (video: any) => video.official && video.type === "Trailer"
+  );
   return (
     <div className="flex flex-col gap-5 lg:gap-20 ">
-      <Hero
-        itemStatus={itemStatus}
-        movieId={movie.id}
-        videos={videos}
+      <MovieBanner
         background_url={backdrop_path}
         title={title}
-        genres={genres}
         posters={posters}
-        average_rating={vote_average}
-        review_count={vote_count}
         overview={overview}
+        subtitle={
+          <>
+            <Rating rating={vote_average} count={vote_count} />
+            <Genres genres={genres} />
+          </>
+        }
+        actions={
+          <>
+            <AddToFavoriteButton itemStatus={itemStatus} movieId={movie.id} />
+            <Trailer officialTrailer={officialTrailer} />
+          </>
+        }
       />
       <div className="flex flex-col gap-20">
         {!!similar_movies.length && (

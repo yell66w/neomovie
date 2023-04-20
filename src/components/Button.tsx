@@ -19,7 +19,7 @@ const Button = ({
   return (
     <button
       {...rest}
-      className={`w-48 flex items-center justify-center gap-2.5 ${buttonClassVariant} text-xs font-bold px-4 h-10 rounded-lg  transition ease-in-out hover:scale-110 duration-200`}
+      className={`flex items-center justify-center gap-2.5 ${buttonClassVariant} text-xs font-bold px-4 h-10 rounded-lg  transition ease-in-out hover:scale-110 duration-200`}
     >
       {startIcon}
       {children}

@@ -6,13 +6,17 @@ interface Props {
 
 const Genres = ({ genres }: Props) => {
   return (
-    <ul className="flex flex-wrap gap-1">
-      {genres?.map(({ id, name }, index) => (
-        <li className="opacity-60 text-xs" key={id}>
-          {name} {index !== genres.length - 1 ? ` / ` : ""}
-        </li>
-      ))}
-    </ul>
+    <>
+      {!!genres?.length && (
+        <ul className="flex flex-wrap gap-1">
+          {genres?.map(({ id, name }, index) => (
+            <li className="opacity-60 text-xs" key={id}>
+              {name} {index !== genres.length - 1 ? ` / ` : ""}
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 };
 

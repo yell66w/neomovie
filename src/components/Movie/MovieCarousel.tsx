@@ -1,9 +1,10 @@
-import { IMAGEDB_URL } from "@/constants";
 import { IMovieOverview } from "@/interfaces/Movie";
 import { useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { RxDot, RxDotFilled } from "react-icons/rx";
-import Hero from "../Hero";
+import MovieBanner from "./MovieBanner";
+import Rating from "./MovieBanner/Rating";
+import ViewMovieDetailsButton from "./MovieBanner/ViewMovieDetailsButton";
 interface Props {
   movies: IMovieOverview[];
 }
@@ -25,36 +26,46 @@ export default function MovieCarousel({ movies }: Props) {
     setCurrentIndex(slideIndex);
   };
   return (
-    <div className="h-[250px] sm:h-[700px] lg:h-[800px] xl:h-[1000px] w-full group">
-      <Hero
-        movieId={movies[currentIndex]?.id}
-        navigateTo={`/movies/${movies[currentIndex]?.id}`}
+    <div className="w-full group">
+      <MovieBanner
         background_url={movies[currentIndex]?.backdrop_path}
         title={movies[currentIndex].title}
         overview={movies[currentIndex].overview}
-        average_rating={movies[currentIndex].vote_average}
-        review_count={movies[currentIndex].vote_count}
-      />
-      {/* Left Arrow */}
-      <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 lg:left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-        <FiChevronLeft onClick={prevSlide} size={30} />
-      </div>
-      {/* Right Arrow */}
-      <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 lg:right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-        <FiChevronRight onClick={nextSlide} size={30} />
-      </div>
-      {/* Indicator */}
-      <div className="flex absolute bottom-10 right-0 left-0 justify-center py-2">
-        {movies.map((slide, slideIndex) => (
-          <div
-            key={slideIndex}
-            onClick={() => goToSlide(slideIndex)}
-            className="text-2xl cursor-pointer"
-          >
-            {currentIndex === slideIndex ? <RxDotFilled /> : <RxDot />}
-          </div>
-        ))}
-      </div>
+        subtitle={
+          <Rating
+            rating={movies[currentIndex].vote_average}
+            count={movies[currentIndex].vote_count}
+          />
+        }
+        actions={
+          <>
+            <ViewMovieDetailsButton
+              navigateTo={`/movies/${movies[currentIndex]?.id}`}
+            />
+          </>
+        }
+      >
+        {/* Left Arrow */}
+        <div className=" hidden group-hover:block absolute  top-48 md:top-60 lg:top-[60%] -translate-x-0 translate-y-[-50%] left-5 lg:left-5 lg:text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+          <FiChevronLeft onClick={prevSlide} />
+        </div>
+        {/* Right Arrow */}
+        <div className="hidden group-hover:block absolute top-48 md:top-60 lg:top-[60%] -translate-x-0 translate-y-[-50%] right-5 lg:right-5 lg:text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+          <FiChevronRight onClick={nextSlide} />
+        </div>
+        {/* Indicator */}
+        <div className="flex absolute top-72 sm:top-[45%]  md:top-[58%] lg:bottom-10 lg:top-auto   right-0 left-0 justify-center py-2">
+          {movies.map((slide, slideIndex) => (
+            <div
+              key={slideIndex}
+              onClick={() => goToSlide(slideIndex)}
+              className="lg:text-2xl cursor-pointer"
+            >
+              {currentIndex === slideIndex ? <RxDotFilled /> : <RxDot />}
+            </div>
+          ))}
+        </div>
+      </MovieBanner>
     </div>
   );
 }
