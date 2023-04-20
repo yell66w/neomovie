@@ -30,8 +30,8 @@ const PosterCard = ({
           onClick && "hover:opacity-20"
         } bg-no-repeat border border-neutral ${
           scrollable &&
-          "w-[100px] min-w-[100px] md:w-[200px] md:min-w-[200px] lg:w-[260px]  lg:min-w-[260px] "
-        } min-h-[80px] min-[300px]:min-h-[110px] min-[350px]:min-h-[150px] min-[500px]:min-h-[200px] sm:min-h-[300px] min-[1024px]:min-h-[400px]  min-[1280px]:min-h-[300px] min-[1600px]:min-h-[400px] bg-center bg-cover duration-500 rounded-xl`}
+          "w-[100px] min-w-[100px] sm:w-[200px] sm:min-w-[200px]  md:w-[250px] md:min-w-[250px] lg:w-[260px]  lg:min-w-[260px] "
+        }    h-32 sm:h-72  md:h-96 bg-center bg-cover duration-500 rounded-xl`}
       />
       {caption && <p className="mt-3 sm:text-xs text-[9px]">{caption}</p>}
     </div>
