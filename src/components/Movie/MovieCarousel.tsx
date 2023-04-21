@@ -5,6 +5,8 @@ import { RxDot, RxDotFilled } from "react-icons/rx";
 import MovieBanner from "./MovieBanner";
 import Rating from "./MovieBanner/Rating";
 import ViewMovieDetailsButton from "./MovieBanner/ViewMovieDetailsButton";
+import BoxImage from "../BoxImage";
+import { IMAGEDB_URL, PLACEHOLDER_BACKGROUND_IMAGE } from "@/constants";
 interface Props {
   movies: IMovieOverview[];
 }
@@ -30,6 +32,16 @@ export default function MovieCarousel({ movies }: Props) {
       <MovieBanner
         background_url={movies[currentIndex]?.backdrop_path}
         title={movies[currentIndex].title}
+        poster={
+          <BoxImage
+            url={
+              movies[currentIndex]
+                ? `${IMAGEDB_URL}/${movies[currentIndex].poster_path}`
+                : PLACEHOLDER_BACKGROUND_IMAGE
+            }
+            className="shadow-2xl shadow-black h-96 w-full xxs:h-[600px] sm:w-[200px] sm:h-[300px]  lg:h-[650px] lg:w-[450px] bg-no-repeat  bg-center bg-cover duration-500 rounded-xl"
+          />
+        }
         overview={movies[currentIndex].overview}
         subtitle={
           <Rating
