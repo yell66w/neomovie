@@ -5,7 +5,7 @@
 ```
 API_KEY=
 ACCESS_TOKEN=
-NEXT_PUBLIC_APP_URL=
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
 _(You can also copy the .env.example)_
