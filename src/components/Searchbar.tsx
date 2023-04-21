@@ -2,12 +2,16 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
-const Searchbar = () => {
+interface Props {
+  onEnter?: () => void;
+}
+const Searchbar = ({ onEnter }: Props) => {
   const [query, setQuery] = useState<string>("");
   const router = useRouter();
   const onSearch = (e: any) => {
     e.preventDefault();
     router.replace(`/movies/search?q=${query}`);
+    if (onEnter) onEnter();
   };
   return (
     <form

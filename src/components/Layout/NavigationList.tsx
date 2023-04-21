@@ -43,7 +43,7 @@ const NavigationList = () => {
           <NavbarTitle />
           <FiX onClick={closeDrawer} className="text-xl cursor-pointer" />
         </div>
-        <Searchbar />
+        <Searchbar onEnter={closeDrawer} />
         <div className="flex flex-col mt-3 gap-3">
           {linkItems.map(({ title, href }) => (
             <LinkItem
