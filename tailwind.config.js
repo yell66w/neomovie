@@ -5,6 +5,7 @@ export const content = [
   "./src/app/**/*.{js,ts,jsx,tsx}",
 ];
 const colors = require("tailwindcss/colors");
+const defaultTheme = require("tailwindcss/defaultTheme");
 export const theme = {
   colors: {
     primary: "#08D9D6",
@@ -13,6 +14,11 @@ export const theme = {
     white: "#fff",
     black: "#0F1015",
     transparent: colors.transparent,
+  },
+  screens: {
+    xxs: "300px",
+    xs: "475px",
+    ...defaultTheme.screens,
   },
   extend: {
     backgroundImage: {

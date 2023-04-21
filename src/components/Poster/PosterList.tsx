@@ -14,7 +14,7 @@ interface Props
 
 const PosterList = ({ children, title, scrollable = true }: Props) => {
   return (
-    <div className={`flex flex-col gap-6  md:max-h-max`}>
+    <div className={`flex flex-col gap-6 `}>
       {title && <h1 className={`text-lg lg:text-2xl font-bold`}>{title}</h1>}
       {scrollable ? (
         <ScrollContainer className="w-full flex gap-5 h-30">
@@ -22,7 +22,7 @@ const PosterList = ({ children, title, scrollable = true }: Props) => {
           <div className="mr-10" />
         </ScrollContainer>
       ) : (
-        <div className="auto-rows-max w-full grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4  xl:grid-cols-6 gap-3 md:gap-6 ">
+        <div className="grid-flow-row w-full grid xxs:grid-cols-3  md:grid-cols-4  xl:grid-cols-6 gap-3 md:gap-6 ">
           {children}
         </div>
       )}

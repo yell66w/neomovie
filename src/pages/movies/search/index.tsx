@@ -19,8 +19,11 @@ const SearchedMoviesPage = ({ movies, total_pages }: Props) => {
   const { q: query } = router.query;
   return (
     <div className="flex lg:px-16 px-4 min-h-screen flex-col gap-10">
-      <h1 className="">
-        Results for: <span className="font-bold text-xl">{query}</span>
+      <h1 className="sm:text-lg xs:text-sm text-xs">
+        Results for:{" "}
+        <span className="font-bold sm:text-xl xs:text-base text-sm ">
+          {query}
+        </span>
       </h1>
       <PosterList scrollable={false}>
         {movies?.map((movie) => {
@@ -48,8 +51,8 @@ const SearchedMoviesPage = ({ movies, total_pages }: Props) => {
           previousClassName="mr-4 hover:text-primary transition duration-200 ease-linear"
           nextClassName="ml-4 hover:text-primary transition duration-200 ease-linear"
           containerClassName=" flex items-center justify-end text-secondary text-sm"
-          activeClassName="bg-primary hover:text-black rounded-full text-black w-10 h-10 flex items-center justify-center"
-          pageClassName="px-5 py-2 hover:text-primary  "
+          activeClassName="bg-primary hover:text-black rounded-full text-black w-6 h-6 md:w-10 md:h-10 flex items-center justify-center focus:text-black"
+          pageClassName="md:px-5 md:py-2 px-3 py-1 hover:text-primary text-[0.8em] md:text-[1em] focus:text-black"
           breakClassName="hover:text-primary transition duration-200 ease-linear"
           pageRangeDisplayed={5}
           pageCount={total_pages}

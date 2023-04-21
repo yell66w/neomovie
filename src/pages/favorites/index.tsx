@@ -17,7 +17,9 @@ const FavoritesPage = ({ movies }: Props) => {
   return (
     <div className="flex lg:px-16 px-4 min-h-screen flex-col gap-10">
       <h1 className="">
-        <span className="font-bold text-xl">My Favorites</span>
+        <span className="font-bold sm:text-xl xs:text-base text-sm">
+          My Favorites
+        </span>
       </h1>
       {!!movies?.length ? (
         <PosterList scrollable={false}>
