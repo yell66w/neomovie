@@ -13,7 +13,7 @@ const Searchbar = () => {
     <form
       onSubmit={onSearch}
       id="search-bar"
-      className="hidden lg:flex ml-auto gap-2 relative  self-center lg:mt-0 mt-5 w-full lg:w-3/12"
+      className="lg:flex ml-auto gap-2 relative  self-center lg:mt-0  mt-3 w-full lg:w-3/12"
     >
       <input
         value={query}
