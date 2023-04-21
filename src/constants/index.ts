@@ -7,5 +7,6 @@ export const PLACEHOLDER_BACKGROUND_IMAGE =
   "https://i.pinimg.com/originals/25/4b/e5/254be59901b9684aae9f4f5c69ee2fdf.png";
 
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
+export const API_KEY = process.env.API_KEY;
 export const MAX_COOKIE_AGE = 60 * 60 * 24 * 7; //1 week
 export const LIST_NAME = "Favorites";

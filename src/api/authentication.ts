@@ -1,9 +1,9 @@
-import { API_URL } from "@/constants";
+import { API_KEY, API_URL } from "@/constants";
 
 export const createSession = async ({ request_token }: any) => {
   try {
     const response = await fetch(
-      `${API_URL}/authentication/session/new?api_key=${process.env.API_KEY}`,
+      `${API_URL}/authentication/session/new?api_key=${API_KEY}`,
       {
         method: "POST",
         headers: {
@@ -30,7 +30,7 @@ export const createSession = async ({ request_token }: any) => {
 export const getRequestToken = async (): Promise<any> => {
   try {
     const response = await fetch(
-      `${API_URL}/authentication/token/new?api_key=${process.env.API_KEY}`
+      `${API_URL}/authentication/token/new?api_key=${API_KEY}`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");

@@ -1,4 +1,4 @@
-import { API_URL } from "@/constants";
+import { API_KEY, API_URL } from "@/constants";
 import { IMovieOverview } from "@/interfaces/Movie";
 
 interface GetMoviesProps {
@@ -12,9 +12,7 @@ export const getMovies = async ({
   path = "/",
 }: GetMoviesProps): Promise<IMovieOverview[] | []> => {
   try {
-    const response = await fetch(
-      `${API_URL}/movie${path}?api_key=${process.env.API_KEY}`
-    );
+    const response = await fetch(`${API_URL}/movie${path}?api_key=${API_KEY}`);
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -37,7 +35,7 @@ export const searchMovies = async ({
 }> => {
   try {
     const response = await fetch(
-      `${API_URL}/search/movie?query=${query}&api_key=${process.env.API_KEY}&page=${page}`
+      `${API_URL}/search/movie?query=${query}&api_key=${API_KEY}&page=${page}`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -57,9 +55,7 @@ export const searchMovies = async ({
 
 export const getMovie = async ({ path }: GetMoviesProps): Promise<any> => {
   try {
-    const response = await fetch(
-      `${API_URL}/movie${path}?api_key=${process.env.API_KEY}`
-    );
+    const response = await fetch(`${API_URL}/movie${path}?api_key=${API_KEY}`);
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }

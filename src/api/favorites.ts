@@ -1,4 +1,4 @@
-import { API_URL, APP_URL, LIST_NAME } from "@/constants";
+import { API_KEY, API_URL, APP_URL, LIST_NAME } from "@/constants";
 import { IMovieOverview } from "@/interfaces/Movie";
 
 export const findListByName = async ({
@@ -10,7 +10,7 @@ export const findListByName = async ({
 }) => {
   try {
     const response = await fetch(
-      `${API_URL}/account/0/lists?api_key=${process.env.API_KEY}&session_id=${session_id}`
+      `${API_URL}/account/0/lists?api_key=${API_KEY}&session_id=${session_id}`
     );
     if (!response.ok) {
       throw new Error("Failed at fetching lists");
@@ -34,7 +34,7 @@ export const createList = async ({
 }) => {
   try {
     const response = await fetch(
-      `${API_URL}/list?api_key=${process.env.API_KEY}&session_id=${session_id}`,
+      `${API_URL}/list?api_key=${API_KEY}&session_id=${session_id}`,
       {
         method: "POST",
         headers: {
@@ -68,7 +68,7 @@ export const getFavoriteMovies = async ({
     const list = await findListByName({ name: LIST_NAME, session_id });
 
     const response = await fetch(
-      `${API_URL}/list/${list.id}?api_key=${process.env.API_KEY}&page=${page}&session_id=${session_id}`
+      `${API_URL}/list/${list.id}?api_key=${API_KEY}&page=${page}&session_id=${session_id}`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -95,7 +95,7 @@ export const addToFavorites = async ({
 }) => {
   try {
     const response = await fetch(
-      `${API_URL}/list/${list_id}/add_item?api_key=${process.env.API_KEY}&session_id=${session_id}`,
+      `${API_URL}/list/${list_id}/add_item?api_key=${API_KEY}&session_id=${session_id}`,
       {
         method: "POST",
         headers: {
@@ -127,7 +127,7 @@ export const removeFromFavorites = async ({
 }) => {
   try {
     const response = await fetch(
-      `${API_URL}/list/${list_id}/remove_item?api_key=${process.env.API_KEY}&session_id=${session_id}`,
+      `${API_URL}/list/${list_id}/remove_item?api_key=${API_KEY}&session_id=${session_id}`,
       {
         method: "POST",
         headers: {
@@ -158,7 +158,7 @@ export const checkItemStatus = async ({
   try {
     const list = await findListByName({ name: LIST_NAME, session_id });
     const response = await fetch(
-      `${API_URL}/list/${list.id}/item_status?api_key=${process.env.API_KEY}&movie_id=${movie_id}`
+      `${API_URL}/list/${list.id}/item_status?api_key=${API_KEY}&movie_id=${movie_id}`
     );
     if (!response.ok) {
       throw new Error("Failed to check item status");
