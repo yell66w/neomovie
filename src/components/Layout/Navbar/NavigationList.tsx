@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-import LinkItem from "../LinkItem";
-import Searchbar from "../Searchbar";
 import NavbarTitle from "./NavbarTitle";
+import LinkItem from "@/components/LinkItem";
+import Searchbar from "@/components/Searchbar";
 const NavigationList = () => {
   const linkItems = [
     {

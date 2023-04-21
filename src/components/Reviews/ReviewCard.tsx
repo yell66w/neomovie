@@ -3,7 +3,7 @@ import { IReview } from "@/interfaces/Review";
 import moment from "moment";
 import React, { useState } from "react";
 import BoxImage from "../BoxImage";
-import Rating from "../Movie/MovieBanner/Rating";
+import Rating from "../Rating";
 
 interface Props {
   review: IReview;

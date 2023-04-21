@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { RxDot, RxDotFilled } from "react-icons/rx";
 import MovieBanner from "./MovieBanner";
-import Rating from "./MovieBanner/Rating";
+import Rating from "../Rating";
 import ViewMovieDetailsButton from "./MovieBanner/ViewMovieDetailsButton";
 import BoxImage from "../BoxImage";
 import { IMAGEDB_URL, PLACEHOLDER_BACKGROUND_IMAGE } from "@/constants";

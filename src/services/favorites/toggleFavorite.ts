@@ -16,12 +16,6 @@ const toggleFavorite = async (
   if (!media_id || !media_type || favorite === undefined) {
     throw new Error("Invalid request body.");
   }
-  const request_token = getCookie("tmdb-request-token", {
-    req,
-    res,
-    maxAge: MAX_COOKIE_AGE,
-    path: "/",
-  });
   const session_id = getCookie("tmdb-session", {
     req,
     res,

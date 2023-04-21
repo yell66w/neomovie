@@ -1,8 +1,6 @@
 import React from "react";
 
-type Props = {};
-
-const Star = (props: Props) => {
+const Star = () => {
   return (
     <svg
       aria-hidden="true"

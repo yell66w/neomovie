@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Searchbar from "../Searchbar";
+import Searchbar from "../../Searchbar";
 import NavbarTitle from "./NavbarTitle";
 import NavigationList from "./NavigationList";
 

@@ -4,9 +4,9 @@ import BoxImage from "@/components/BoxImage";
 import Genres from "@/components/Genres";
 import MovieBanner from "@/components/Movie/MovieBanner";
 import AddToFavoriteButton from "@/components/Movie/MovieBanner/AddToFavoriteButton";
-import Rating from "@/components/Movie/MovieBanner/Rating";
 import Trailer from "@/components/Movie/MovieBanner/Trailer";
 import MovieOverviewList from "@/components/Movie/MovieOverviewList";
+import Rating from "@/components/Rating";
 import ReviewList from "@/components/Reviews/ReviewList";
 import {
   IMAGEDB_URL,
@@ -14,7 +14,6 @@ import {
   PLACEHOLDER_BACKGROUND_IMAGE,
 } from "@/constants";
 import { ICast } from "@/interfaces/Cast";
-import { IImage } from "@/interfaces/Image";
 import { IMovie, IMovieOverview } from "@/interfaces/Movie";
 import { IReview } from "@/interfaces/Review";
 import { getCookie } from "cookies-next";

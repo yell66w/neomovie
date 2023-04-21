@@ -3,7 +3,6 @@ import { createList, findListByName } from "@/api/favorites";
 import { setCookie } from "cookies-next";
 import { NextApiRequest, NextApiResponse } from "next";
 import { APP_URL, LIST_NAME, MAX_COOKIE_AGE } from "./../../../constants/index";
-//Todo refactor
 export default async function authCallbackHandler(
   req: NextApiRequest,
   res: NextApiResponse<any>
@@ -18,10 +17,10 @@ export default async function authCallbackHandler(
         //Create session
         const session_id = await createSession({ request_token });
 
-        const list = await findListByName({ name: LIST_NAME, session_id });
 
         //Automatically create a list
-        //Only create the list if it does not exist yet
+        //and only create the list if it does not exist yet
+        const list = await findListByName({ name: LIST_NAME, session_id });
         if (!list) {
           await createList({ name: LIST_NAME, session_id });
         }
