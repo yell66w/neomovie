@@ -21,12 +21,6 @@ export interface IMovie {
   original_language: string;
   overview: string;
   popularity: number;
-  production_companies: {
-    name: string;
-    id: number;
-    logo_path: string | null;
-    origin_country: string;
-  };
   revenue: number;
   runtime: number;
   status: string;

@@ -1,20 +1,19 @@
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import { YOUTUBE_URL } from "@/constants";
-import { IVideo } from "@/interfaces/Video";
-import React, { useState } from "react";
+import { useState } from "react";
 import { BsFillPlayFill } from "react-icons/bs";
 
 interface Props {
-  officialTrailer?: IVideo;
+  trailerKey?: string;
 }
 
-const Trailer = ({ officialTrailer }: Props) => {
+const Trailer = ({ trailerKey }: Props) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      {!!officialTrailer && (
+      {!!trailerKey && (
         <>
           <Button
             variant="secondary"
@@ -24,11 +23,11 @@ const Trailer = ({ officialTrailer }: Props) => {
             Watch Trailer
           </Button>
           {showModal ? (
-            <Modal open={showModal && !!officialTrailer} setOpen={setShowModal}>
+            <Modal open={showModal && !!trailerKey} setOpen={setShowModal}>
               <iframe
                 width="100%"
                 height="100%"
-                src={`${YOUTUBE_URL}/${officialTrailer?.key}?autoplay=true`}
+                src={`${YOUTUBE_URL}/${trailerKey}?autoplay=true`}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen

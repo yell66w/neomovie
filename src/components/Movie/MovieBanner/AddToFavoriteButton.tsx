@@ -1,5 +1,6 @@
 import { toggleFavorite } from "@/api/favorites";
 import Button from "@/components/Button";
+import Spinner from "@/components/Spinner";
 import { APP_URL } from "@/constants";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -17,6 +18,7 @@ const AddToFavoriteButton = ({ itemStatus, movieId }: Props) => {
   const router = useRouter();
   const { id } = router.query;
   const tmdbRequestToken = cookies["tmdb-request-token"];
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (itemStatus !== undefined) {
@@ -25,6 +27,7 @@ const AddToFavoriteButton = ({ itemStatus, movieId }: Props) => {
   }, [id, itemStatus]);
 
   const toggleFavoriteHandler = async () => {
+    setLoading(true);
     if (!tmdbRequestToken) {
       //Login User if no request token
       router.replace(`${APP_URL}/api/callback/auth`);
@@ -33,15 +36,20 @@ const AddToFavoriteButton = ({ itemStatus, movieId }: Props) => {
       await toggleFavorite({ movie_id: movieId, favorite: !markedFavorite });
       setMarkedFavorite((prev) => !prev);
     }
+    setLoading(false);
   };
   return (
     <>
       {itemStatus !== undefined && (
         <Button
           onClick={toggleFavoriteHandler}
-          startIcon={<BsHeartFill size={12} />}
+          startIcon={loading ? <Spinner /> : <BsHeartFill size={12} />}
         >
-          {markedFavorite ? "Added To Favorites" : "Add To Favorites"}
+          {loading
+            ? "Loading"
+            : markedFavorite
+            ? "Added To Favorites"
+            : "Add To Favorites"}
         </Button>
       )}
     </>

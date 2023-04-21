@@ -7,6 +7,7 @@ import { IMovieOverview } from "@/interfaces/Movie";
 import { getCookie } from "cookies-next";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
+import { useCookies } from "react-cookie";
 
 interface Props {
   movies: IMovieOverview[];
@@ -14,28 +15,12 @@ interface Props {
 
 const FavoritesPage = ({ movies }: Props) => {
   const router = useRouter();
+  const [cookies] = useCookies();
+  const tmdbRequestToken = cookies["tmdb-request-token"];
+
   return (
     <div className="flex lg:px-16 px-4 min-h-screen flex-col gap-10">
-      <h1 className="">
-        <span className="font-bold sm:text-xl xs:text-base text-sm">
-          My Favorites
-        </span>
-      </h1>
-      {!!movies?.length ? (
-        <PosterList scrollable={false}>
-          {movies?.map((movie) => {
-            return (
-              <PosterCard
-                scrollable={false}
-                onClick={() => router.replace(`/movies/${movie.id}`)}
-                key={movie.id}
-                image_url={movie.poster_path}
-                caption={movie.title}
-              />
-            );
-          })}
-        </PosterList>
-      ) : (
+      {!tmdbRequestToken ? (
         <div className="w-full mt-48 items-center  flex flex-col gap-6">
           <h1 className="text-sm">
             Login to your TheMovieDB account to add your favorite movies
@@ -46,6 +31,34 @@ const FavoritesPage = ({ movies }: Props) => {
             Login
           </Button>
         </div>
+      ) : (
+        <>
+          <h1 className="">
+            <span className="font-bold sm:text-xl xs:text-base text-sm">
+              My Favorites
+            </span>
+          </h1>
+
+          {!!movies?.length ? (
+            <PosterList scrollable={false}>
+              {movies?.map((movie) => {
+                return (
+                  <PosterCard
+                    scrollable={false}
+                    onClick={() => router.replace(`/movies/${movie.id}`)}
+                    key={movie.id}
+                    image_url={movie.poster_path}
+                    caption={movie.title}
+                  />
+                );
+              })}
+            </PosterList>
+          ) : (
+            <div className="w-full mt-48 items-center  flex flex-col gap-6">
+              <h1 className="text-sm">No favorite movies added.</h1>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

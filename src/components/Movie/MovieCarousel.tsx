@@ -59,15 +59,18 @@ export default function MovieCarousel({ movies }: Props) {
       >
         {/* Left Arrow */}
         <div className=" hidden group-hover:block absolute  top-48 md:top-60 lg:top-[60%] -translate-x-0 translate-y-[-50%] left-5 lg:left-5 lg:text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-          <FiChevronLeft onClick={prevSlide} />
+          <FiChevronLeft role="left-arrow" onClick={prevSlide} />
         </div>
         {/* Right Arrow */}
         <div className="hidden group-hover:block absolute top-48 md:top-60 lg:top-[60%] -translate-x-0 translate-y-[-50%] right-5 lg:right-5 lg:text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-          <FiChevronRight onClick={nextSlide} />
+          <FiChevronRight role="right-arrow" onClick={nextSlide} />
         </div>
         {/* Indicator */}
-        <div className="flex absolute top-72 sm:top-[45%]  md:top-[58%] lg:bottom-10 lg:top-auto   right-0 left-0 justify-center py-2">
-          {movies.map((slide, slideIndex) => (
+        <div
+          id="indicator"
+          className="flex absolute top-72 sm:top-[45%]  md:top-[58%] lg:bottom-10 lg:top-auto   right-0 left-0 justify-center py-2"
+        >
+          {movies.map((_, slideIndex) => (
             <div
               key={slideIndex}
               onClick={() => goToSlide(slideIndex)}

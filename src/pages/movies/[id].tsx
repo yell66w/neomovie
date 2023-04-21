@@ -22,7 +22,6 @@ import { GetServerSideProps } from "next";
 
 interface Props {
   movie: IMovie;
-  casts: ICast[];
   reviews: IReview[];
   similar_movies: IMovieOverview[];
   videos: IVideo[];
@@ -48,6 +47,7 @@ const MovieDetailsPage = ({
         title={title}
         poster={
           <BoxImage
+            role="movie-poster"
             url={
               image_url
                 ? `${IMAGEDB_URL}/${image_url}`
@@ -66,7 +66,7 @@ const MovieDetailsPage = ({
         actions={
           <>
             <AddToFavoriteButton itemStatus={itemStatus} movieId={movie.id} />
-            <Trailer officialTrailer={officialTrailer} />
+            <Trailer trailerKey={officialTrailer?.key} />
           </>
         }
       />
