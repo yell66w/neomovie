@@ -1,5 +1,6 @@
 import { checkItemStatus } from "@/api/favorites";
 import { getMovie } from "@/api/movies";
+import BoxImage from "@/components/BoxImage";
 import Genres from "@/components/Genres";
 import MovieBanner from "@/components/Movie/MovieBanner";
 import AddToFavoriteButton from "@/components/Movie/MovieBanner/AddToFavoriteButton";
@@ -7,7 +8,11 @@ import Rating from "@/components/Movie/MovieBanner/Rating";
 import Trailer from "@/components/Movie/MovieBanner/Trailer";
 import MovieOverviewList from "@/components/Movie/MovieOverviewList";
 import ReviewList from "@/components/Reviews/ReviewList";
-import { MAX_COOKIE_AGE } from "@/constants";
+import {
+  IMAGEDB_URL,
+  MAX_COOKIE_AGE,
+  PLACEHOLDER_BACKGROUND_IMAGE,
+} from "@/constants";
 import { ICast } from "@/interfaces/Cast";
 import { IImage } from "@/interfaces/Image";
 import { IMovie, IMovieOverview } from "@/interfaces/Movie";
@@ -19,7 +24,6 @@ interface Props {
   movie: IMovie;
   casts: ICast[];
   reviews: IReview[];
-  posters: IImage[];
   similar_movies: IMovieOverview[];
   videos: any;
   itemStatus: boolean;
@@ -27,7 +31,6 @@ interface Props {
 const MovieDetailsPage = ({
   movie,
   reviews,
-  posters,
   similar_movies,
   videos,
   itemStatus,
@@ -37,12 +40,22 @@ const MovieDetailsPage = ({
   const officialTrailer = videos?.find(
     (video: any) => video.official && video.type === "Trailer"
   );
+  const image_url = movie.poster_path;
   return (
     <div className="flex flex-col gap-5 lg:gap-20 ">
       <MovieBanner
         background_url={backdrop_path}
         title={title}
-        posters={posters}
+        poster={
+          <BoxImage
+            url={
+              image_url
+                ? `${IMAGEDB_URL}/${image_url}`
+                : PLACEHOLDER_BACKGROUND_IMAGE
+            }
+            className="shadow-2xl shadow-black h-96 w-full xxs:h-[600px] sm:w-[200px] sm:h-[300px]  lg:h-[650px] lg:w-[450px] bg-no-repeat  bg-center bg-cover duration-500 rounded-xl"
+          />
+        }
         overview={overview}
         subtitle={
           <>
@@ -91,18 +104,9 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const { results: reviews } = await getMovie({ path: `/${id}/reviews` });
 
-  const images = await getMovie({ path: `/${id}/images` });
-
-  const posters = images?.posters
-    ?.sort((a: any, b: any) => {
-      return a.vote_average - b.vote_average;
-    })
-    .slice(0, 10);
-
   return {
     props: {
       movie,
-      posters,
       reviews,
       similar_movies,
       videos,

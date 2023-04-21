@@ -1,14 +1,11 @@
 import BoxImage from "@/components/BoxImage";
 import { IMAGEDB_URL, PLACEHOLDER_BACKGROUND_IMAGE } from "@/constants";
-import { IImage } from "@/interfaces/Image";
 import { ReactNode } from "react";
-import PosterCard from "../../Poster/PosterCard";
-import PosterList from "../../Poster/PosterList";
 interface Props {
   background_url: string | null;
   title: string;
   overview: string;
-  posters?: IImage[];
+  poster?: ReactNode;
   children?: ReactNode;
   actions?: ReactNode;
   subtitle?: ReactNode;
@@ -17,7 +14,7 @@ interface Props {
 
 const MovieBanner = ({
   background_url = "",
-  posters,
+  poster,
   title,
   overview,
   children,
@@ -39,8 +36,8 @@ const MovieBanner = ({
           {imageOverlay}
         </BoxImage>
 
-        <div className="lg:bg-gradient-to-t lg:from-black lg:via-transparent lg:to-transparent flex flex-col lg:flex-row gap-20    lg:gap-40 lg:absolute lg:top-auto lg:bottom-0 lg:pb-16 w-full px-4 lg:px-0 lg:pl-32">
-          <div className="flex flex-col lg:w-6/12">
+        <div className="lg:bg-gradient-to-t lg:from-black lg:via-transparent lg:to-transparent flex flex-col sm:flex-row lg:flex-row sm:gap-10 gap-20 sm:justify-center    lg:gap-40 lg:absolute lg:top-auto lg:bottom-0 lg:pb-16 w-full px-4 lg:px-10 ">
+          <div className=" sm:order-2 lg:order-1 flex flex-col lg:w-6/12  justify-end">
             <div className="flex flex-col gap-6 mt-10">
               <h1 className="font-bold text-2xl lg:text-6xl">{title}</h1>
               <div className="flex flex-col lg:flex-row text-sm  gap-1 lg:items-center">
@@ -57,17 +54,7 @@ const MovieBanner = ({
               {actions}
             </div>
           </div>
-          {/* Posters */}
-          {/* POSTER 1 only */}
-          {!!posters?.length && (
-            <div className="flex flex-col lg:w-6/12 gap-10">
-              <PosterList title="POSTERS">
-                {posters?.map(({ file_path }) => {
-                  return <PosterCard image_url={file_path} key={file_path} />;
-                })}
-              </PosterList>
-            </div>
-          )}
+          <div className="sm:order-1 lg:order-2 sm:mt-5">{poster}</div>
         </div>
         {children}
       </div>
