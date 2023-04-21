@@ -1,8 +1,9 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
+
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  startIcon?: any;
-  endIcon?: any;
-  variant?: string;
+  startIcon?: ReactNode;
+  endIcon?: ReactNode;
+  variant?: "primary" | "secondary";
 }
 const Button = ({
   startIcon,

@@ -4,7 +4,7 @@ import React from "react";
 import { BsArrowRight } from "react-icons/bs";
 
 type Props = {
-  navigateTo?: any;
+  navigateTo?: string;
 };
 
 const ViewMovieDetailsButton = ({ navigateTo }: Props) => {

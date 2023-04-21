@@ -3,7 +3,7 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ReactPaginate from "react-paginate";
 
 interface Props {
-  onPageChange: (e: any) => void;
+  onPageChange: (selectedItem: { selected: number }) => void;
   pageCount: number;
 }
 

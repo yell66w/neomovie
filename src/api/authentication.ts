@@ -1,6 +1,10 @@
 import { API_KEY, API_URL } from "@/constants";
 
-export const createSession = async ({ request_token }: any) => {
+export const createSession = async ({
+  request_token,
+}: {
+  request_token: any;
+}) => {
   try {
     const response = await fetch(
       `${API_URL}/authentication/session/new?api_key=${API_KEY}`,

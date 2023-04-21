@@ -1,11 +1,12 @@
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import { YOUTUBE_URL } from "@/constants";
+import { IVideo } from "@/interfaces/Video";
 import React, { useState } from "react";
 import { BsFillPlayFill } from "react-icons/bs";
 
 interface Props {
-  officialTrailer: any;
+  officialTrailer?: IVideo;
 }
 
 const Trailer = ({ officialTrailer }: Props) => {

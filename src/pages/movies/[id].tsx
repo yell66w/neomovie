@@ -16,6 +16,7 @@ import {
 import { ICast } from "@/interfaces/Cast";
 import { IMovie, IMovieOverview } from "@/interfaces/Movie";
 import { IReview } from "@/interfaces/Review";
+import { IVideo } from "@/interfaces/Video";
 import { getCookie } from "cookies-next";
 import { GetServerSideProps } from "next";
 
@@ -24,7 +25,7 @@ interface Props {
   casts: ICast[];
   reviews: IReview[];
   similar_movies: IMovieOverview[];
-  videos: any;
+  videos: IVideo[];
   itemStatus: boolean;
 }
 const MovieDetailsPage = ({
@@ -37,7 +38,7 @@ const MovieDetailsPage = ({
   const { title, genres, overview, backdrop_path, vote_average, vote_count } =
     movie;
   const officialTrailer = videos?.find(
-    (video: any) => video.official && video.type === "Trailer"
+    (video) => video.official && video.type === "Trailer"
   );
   const image_url = movie.poster_path;
   return (
