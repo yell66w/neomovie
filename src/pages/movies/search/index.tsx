@@ -1,13 +1,10 @@
-import { getMovies, searchMovies } from "@/api/movies";
+import { searchMovies } from "@/api/movies";
+import Pagination from "@/components/Pagination";
 import PosterCard from "@/components/Poster/PosterCard";
 import PosterList from "@/components/Poster/PosterList";
 import { IMovieOverview } from "@/interfaces/Movie";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import React from "react";
-import { BsChevronRight } from "react-icons/bs";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import ReactPaginate from "react-paginate";
 
 interface Props {
   movies: IMovieOverview[];
@@ -38,26 +35,14 @@ const SearchedMoviesPage = ({ movies, total_pages }: Props) => {
           );
         })}
       </PosterList>
-
       <div>
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel={<FiChevronRight />}
+        <Pagination
           onPageChange={(event) => {
             router.replace(
               `/movies/search?q=${query}&page=${event.selected + 1}`
             );
           }}
-          previousClassName="mr-4 hover:text-primary transition duration-200 ease-linear"
-          nextClassName="ml-4 hover:text-primary transition duration-200 ease-linear"
-          containerClassName=" flex items-center justify-end text-secondary text-sm"
-          activeClassName="bg-primary hover:text-black rounded-full text-black w-6 h-6 md:w-10 md:h-10 flex items-center justify-center focus:text-black"
-          pageClassName="md:px-5 md:py-2 px-3 py-1 hover:text-primary text-[0.8em] md:text-[1em] focus:text-black"
-          breakClassName="hover:text-primary transition duration-200 ease-linear"
-          pageRangeDisplayed={5}
           pageCount={total_pages}
-          previousLabel={<FiChevronLeft />}
-          renderOnZeroPageCount={null}
         />
       </div>
     </div>
